@@ -16,11 +16,11 @@ public class AuthorizationService implements UserDetailsService {
     UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       return userRepository.findByLogin(username);
+       return userRepository.findByUsername(username);
     }
 
     public void registerUser(RegisterDTO dto) {
-        if (this.userRepository.findByLogin(dto.username()) != null) {
+        if (this.userRepository.findByUsername(dto.username()) != null) {
             throw new RuntimeException("Usuário já existe!");
         }
 
