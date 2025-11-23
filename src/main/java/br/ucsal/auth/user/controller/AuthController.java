@@ -29,10 +29,8 @@ public class AuthController {
     @Autowired
     private TokenService tokenService;
 
-
-
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthDTO dto){
+    public ResponseEntity login(@RequestBody @Valid AuthDTO dto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(dto.username(), dto.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         var token = tokenService.generateToken((User) auth.getPrincipal());
@@ -40,7 +38,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO dto){
+    public ResponseEntity register(@RequestBody @Valid RegisterDTO dto) {
         try {
             // Delega a lógica de criar usuário criptografado para o Service
             authorizationService.registerUser(dto);
