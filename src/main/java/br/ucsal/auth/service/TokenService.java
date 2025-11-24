@@ -19,8 +19,8 @@ public class TokenService {
 
     private static final String ISSUER = "auth-api";
 
-    public String generateToken(User user){
-        try{
+    public String generateToken(User user) {
+        try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             var token = JWT.create()
                     .withIssuer(ISSUER)
@@ -29,7 +29,7 @@ public class TokenService {
                     .withClaim("role", user.getRole().name())
                     .withExpiresAt(genExpireAt());
 
-            if(user.getProfessorId() != null){
+            if (user.getProfessorId() != null) {
                 token.withClaim("professorId", user.getProfessorId());
             }
 
@@ -40,9 +40,8 @@ public class TokenService {
         }
     }
 
-
-    public String validateToken(String token){
-        try{
+    public String validateToken(String token) {
+        try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
                     .withIssuer(ISSUER)
@@ -54,7 +53,7 @@ public class TokenService {
         }
     }
 
-    private Instant genExpireAt(){
+    private Instant genExpireAt() {
         return LocalDateTime.now().plusDays(3).toInstant(ZoneOffset.of("-03:00"));
     }
 

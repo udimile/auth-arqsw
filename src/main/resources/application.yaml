@@ -17,7 +17,7 @@ spring:
 api:
   security:
     token:
-      secret: ${JWT_SECRET:minha-chave-secreta-padrao}
+      secret: minha-chave
 
 eureka:
   client:
