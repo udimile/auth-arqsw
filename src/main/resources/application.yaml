@@ -12,12 +12,7 @@ spring:
     hibernate:
       ddl-auto: update
   config:
-    import: "optional:configserver:"
-
-api:
-  security:
-    token:
-      secret: minha-chave
+    import: optional:configserver:http://localhost:8888
 
 eureka:
   client:
