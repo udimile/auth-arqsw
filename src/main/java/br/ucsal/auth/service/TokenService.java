@@ -1,7 +1,6 @@
 package br.ucsal.auth.service;
 
 import br.ucsal.auth.user.model.entity.User;
-import br.ucsal.auth.validation.AuthValidation;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -20,11 +19,6 @@ public class TokenService {
     private String secret;
 
     private static final String ISSUER = "auth-api";
-    private final AuthValidation authValidation;
-
-    public TokenService(AuthValidation authValidation) {
-        this.authValidation = authValidation;
-    }
 
     public String generateToken(User user) {
         try {
@@ -37,7 +31,6 @@ public class TokenService {
                     .withExpiresAt(genExpireAt());
 
             if (user.getProfessorId() != null) {
-                authValidation.validaProfessorId(user.getProfessorId());
                 token.withClaim("professorId", user.getProfessorId());
             }
 
