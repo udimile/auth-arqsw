@@ -1,6 +1,7 @@
 package br.ucsal.auth.service;
 
 import br.ucsal.auth.user.model.entity.User;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -26,7 +27,7 @@ public class TokenService {
                     .withIssuer(ISSUER)
                     .withSubject(user.getUsername())
                     .withClaim("id", user.getId())
-                    .withClaim("role", user.getRole().name())
+                    .withClaim("role", "ROLE_" + user.getRole().name())
                     .withExpiresAt(genExpireAt());
 
             if (user.getProfessorId() != null) {
